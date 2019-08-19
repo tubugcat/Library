@@ -26,7 +26,7 @@
         response.sendRedirect("/Library/index.jsp");
     }
 %>
-<form action="BookAction?action=addtemp" onsubmit="return errorsubmit()" method="post">
+<form action="BookAction?action=addtemp" enctype="multipart/form-data" onsubmit="return errorsubmit()" method="post">
     <div class="bookinfo">
         <div class="title">
             <span>请输入书本信息</span>
@@ -34,6 +34,10 @@
         <div>
             <span class="infotitle">书本编号：</span><input name="bookid" class="required" id="bookid" onkeyup="bookcheck()"  ><span id="bookidcheck" class="error"></span>
         </div>
+        <div>
+            <span class="infotitle">书本图片：</span><input name="file" class="required" type="file"  id="file"  >
+        </div>
+
         <div>
             <span class="infotitle">书本名称：</span><input class="required" name="bookname"><span id="booknamecheck" class="error"></span>
         </div>

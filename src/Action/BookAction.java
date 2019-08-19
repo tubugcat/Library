@@ -5,15 +5,13 @@ import Entity.Book;
 import Entity.User;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
+@MultipartConfig
 public class BookAction extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -57,6 +55,10 @@ public class BookAction extends HttpServlet {
     }
 
     private void addtemp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        Part part = request.getPart("file");//上传文件对象的描述
+        part.write("D://lufei.jpg");//把上传的文件写到指定的位置，参数是文件保存文件名
+
+
         String next = request.getParameter("over");
         BookDao bdao = new BookDao();
         Book book = new Book();
@@ -116,7 +118,7 @@ public class BookAction extends HttpServlet {
             out.write(book.getName() + "||" + book.getAuthor() + "||" + book.getPublisher() + "||" + book.getRemain());
         }
         else if(next.equals("existcheck")){
-            out.write(book.getName());
+            out.write(book.getName() == null ? "null" : book.getName());
         }
     }
 
